@@ -20,3 +20,10 @@
 {% else %}
 	<p>No polls are available.</p>
 {% endif %}
+
+{% if request.session %}
+<p>You are logged in.</p>
+
+{% else %}
+<p> You are not logged in.</p>
+{% endif %}
