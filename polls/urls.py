@@ -18,6 +18,6 @@ urlpatterns = patterns('',
 				template_name='polls/results.html'),
 			name='poll_results'),
 		url(r'^(?P<poll_id>\d+)/vote/$','polls.views.vote'),
-		url(r'^login/$', 'polls.views.login'),
+		url(r'^test/$', 'polls.views.test_session'),
 
 		)

@@ -23,4 +23,6 @@ def vote(request, poll_id):
 		selected_choice.save()
 		return HttpResponseRedirect(reverse('poll_results', args=(p.id,)))
 
-
+@login_required
+def test_session(request):
+	return HttpResponse("Congratulations, you can access this user-restrictd material.")
