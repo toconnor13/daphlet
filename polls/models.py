@@ -15,6 +15,13 @@ class Poll(models.Model):
 	was_published_recently.admin_order_field = 'pub_date'
 	was_published_recently.boolean = True
 	was_published_recently.short_description = "Published recently?"
+	
+	def vote_count(self):
+		total_votes = 0
+		for choice in self.choice_set.all():
+			total_votes += choice.votes
+		return total_votes
+	vote_count.short_description = "Votes"
 
 class Choice(models.Model):
 	poll = models.ForeignKey(Poll)

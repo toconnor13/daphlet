@@ -13,6 +13,6 @@ class PollAdmin(admin.ModelAdmin):
 
 	]
 	inlines = [ChoiceInline]
-	list_display = ('question','pub_date','was_published_recently')
+	list_display = ('question','pub_date','was_published_recently', 'vote_count')
 
 admin.site.register(Poll, PollAdmin)
