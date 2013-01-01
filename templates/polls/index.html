@@ -13,7 +13,7 @@
 {% if latest_poll_list %}
 	<ul>
 		{% for poll in latest_poll_list %}
-		<li> <a href = "/polls/{{poll.id}}/" >{{poll.question}}</a> </li>
+		<li> <a href = "/polls/{{poll.id}}/" >{{poll.question}}</a> -- {{ poll.vote_count }} vote{{poll.vote_count|pluralize }} cast </li>
 		{% endfor %}
 	</ul>
 
@@ -21,9 +21,3 @@
 	<p>No polls are available.</p>
 {% endif %}
 
-{% if request.session %}
-<p>You are logged in.</p>
-
-{% else %}
-<p> You are not logged in.</p>
-{% endif %}
