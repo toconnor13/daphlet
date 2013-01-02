@@ -6,6 +6,7 @@ from django.template import RequestContext
 from polls.models import Choice, Poll
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 
 
@@ -23,6 +24,20 @@ def vote(request, poll_id):
 		selected_choice.save()
 		return HttpResponseRedirect(reverse('poll_results', args=(p.id,)))
 
+def submit(request):
+	question = request.POST['question']
+	choice_1 = request.POST['choice_1']
+	choice_2 = request.POST['choice_2']
+	choice_3 = request.POST['choice_3']
+	p = Poll(question=question, pub_date=timezone.now())
+	p.save()
+	p.choice_set.create(choice=choice_1, votes=0)
+	p.choice_set.create(choice=choice_2, votes=0)
+	p.choice_set.create(choice=choice_3, votes=0)
+	p.save()
+	return HttpResponse("You have successfully created a poll.")
+
+
 @login_required
 def test_session(request):
-	return HttpResponse("Congratulations, you can access this user-restrictd material.")
+	return HttpResponse("Congratulations, you can access this user-restricted material.")

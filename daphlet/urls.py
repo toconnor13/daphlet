@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^polls/', include('polls.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/$', 'auth_views.login'),
+    url(r'^accounts/register/$', 'accounts.views.register'),
 )

@@ -5,7 +5,7 @@ from polls.models import Poll
 urlpatterns = patterns('',
 		url(r'^$', 
 			ListView.as_view(
-				queryset = Poll.objects.order_by('-pub_date')[:5],
+				queryset = sorted(Poll.objects.all(), key=Poll.vote_count, reverse=True),
 				context_object_name='latest_poll_list',
 				template_name='polls/index.html')),
 		url(r'^(?P<pk>\d+)/$',
@@ -19,5 +19,6 @@ urlpatterns = patterns('',
 			name='poll_results'),
 		url(r'^(?P<poll_id>\d+)/vote/$','polls.views.vote'),
 		url(r'^test/$', 'polls.views.test_session'),
+		url(r'^submit/$', 'polls.views.submit')
 
 		)

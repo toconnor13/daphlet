@@ -1,15 +1,17 @@
-<form method="post" action="../login/">
+
+<h1>Register</h1>
+<form method="post" action="../accounts/register/">
 	{% csrf_token %}
 	<label>Username:</label> <input type="text" name="username"><br/>
+	<label>Email:</label> <input type="text" name="email"><br/>
 	<label>Password:</label> <input type="text" name="password"><br/>
-
-<input type="submit" value="Login"/>
+<input type="submit" value="Register"/>
 </form>
 
  
 
 
-
+<h1>List of polls</h1>
 {% if latest_poll_list %}
 	<ul>
 		{% for poll in latest_poll_list %}
@@ -21,3 +23,12 @@
 	<p>No polls are available.</p>
 {% endif %}
 
+<h1>Submit a poll</h1>
+<form method="post" action="/polls/submit/">
+	{% csrf_token %}
+	<label>Question:</label> <input type="text" name="question"><br/>
+	<label>Choice 1:</label> <input type="text" name="choice_1"><br/>
+	<label>Choice 2:</label> <input type="text" name="choice_2"><br/>
+	<label>Choice 3:</label> <input type="text" name="choice_3"><br/>
+	<input type="submit" value="Submit poll">
+	

@@ -17,10 +17,10 @@ class Poll(models.Model):
 	was_published_recently.short_description = "Published recently?"
 	
 	def vote_count(self):
-		total_votes = 0
+		vote_count = 0
 		for choice in self.choice_set.all():
-			total_votes += choice.votes
-		return total_votes
+			vote_count += choice.votes
+		return vote_count
 	vote_count.short_description = "Votes"
 
 class Choice(models.Model):

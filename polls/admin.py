@@ -9,7 +9,7 @@ class ChoiceInline(admin.TabularInline):
 class PollAdmin(admin.ModelAdmin):
 	fieldsets = [
 			(None, 	{'fields': ['question']}),
-			('Date information',	{'fields': ['pub_date'], 'classes': ['collapse']}),
+			('Date information',	{'fields': ['pub_date']}),
 
 	]
 	inlines = [ChoiceInline]
