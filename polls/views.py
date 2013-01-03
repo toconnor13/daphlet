@@ -1,5 +1,5 @@
 # Create your views here.
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
@@ -41,3 +41,7 @@ def submit(request):
 @login_required
 def test_session(request):
 	return HttpResponse("Congratulations, you can access this user-restricted material.")
+
+def stylesheet(request):
+	return redirect('http://www.twitter.github.com/bootstrap/assets/css/bootstrap.css')
+

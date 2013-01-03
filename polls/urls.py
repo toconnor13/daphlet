@@ -19,6 +19,8 @@ urlpatterns = patterns('',
 			name='poll_results'),
 		url(r'^(?P<poll_id>\d+)/vote/$','polls.views.vote'),
 		url(r'^test/$', 'polls.views.test_session'),
-		url(r'^submit/$', 'polls.views.submit')
+		url(r'^submit/$', 'polls.views.submit'),
+		url(r'^style.css', 'polls.views.stylesheet'),
+		#url(r'^style.css', 'direct_to_template', {'template': 'style.css'}),
 
 		)
