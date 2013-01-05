@@ -43,5 +43,5 @@ def test_session(request):
 	return HttpResponse("Congratulations, you can access this user-restricted material.")
 
 def stylesheet(request):
-	return redirect('http://www.twitter.github.com/bootstrap/assets/css/bootstrap.css')
+	return redirect('http://raw.github.com/Sheefrex/daphlet/master/templates/style.css')
 
