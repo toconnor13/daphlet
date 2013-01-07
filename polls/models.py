@@ -6,6 +6,7 @@ from django.utils import timezone
 class Poll(models.Model):
 	question = models.CharField(max_length=200)
 	pub_date = models.DateTimeField('date_published')
+	has_voted_list = models.CommaSeparatedIntegerField(max_length=1000000)
 
 	def __unicode__(self):
 		return self.question

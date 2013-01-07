@@ -21,6 +21,9 @@ def vote(request, poll_id):
 			}, context_instance=RequestContext(request))
 	else:
 		selected_choice.votes += 1
+		string_to_join = str(request.user.id)+','
+		p.has_voted_list += string_to_join
+		p.save()
 		selected_choice.save()
 		return HttpResponseRedirect(reverse('poll_results', args=(p.id,)))
 
