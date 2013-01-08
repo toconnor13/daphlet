@@ -20,12 +20,23 @@ def vote(request, poll_id):
 			'error_message': "You didn't select a choice.",
 			}, context_instance=RequestContext(request))
 	else:
-		selected_choice.votes += 1
-		string_to_join = str(request.user.id)+','
-		p.has_voted_list += string_to_join
-		p.save()
-		selected_choice.save()
-		return HttpResponseRedirect(reverse('poll_results', args=(p.id,)))
+		if p.has_voted_list == u'':
+			selected_choice.votes += 1
+			string_to_join = str(request.user.id)+','
+			p.has_voted_list += string_to_join
+			p.save()
+			selected_choice.save()
+			return HttpResponseRedirect(reverse('poll_results', args=(p.id,)))
+		else:
+			if request.user.id in eval(p.has_voted_list):
+				return HttpResponse('It seems you have already voted.')
+			else:
+				selected_choice.votes += 1
+				string_to_join = str(request.user.id)+','
+				p.has_voted_list += string_to_join
+				p.save()
+				selected_choice.save()
+				return HttpResponseRedirect(reverse('poll_results', args=(p.id,)))
 
 def submit(request):
 	question = request.POST['question']
