@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div>
 <h1>Register</h1>
 <form method="post" action="../accounts/register/">
 	{% csrf_token %}
@@ -9,7 +10,7 @@
 	<label>Password:</label> <input type="text" name="password"><br/>
 <input type="submit" value="Register"/>
 </form>
-
+</div>
  
 
 

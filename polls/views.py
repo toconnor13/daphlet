@@ -5,11 +5,19 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from polls.models import Choice, Poll
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
+def results(request, poll_id):
+	p = get_object_or_404(Poll, pk=poll_id)
+	user_list = User.objects.all()
+	return render_to_response('polls/results.html', {
+		'poll': p,
+		'users': user_list,
+		}, context_instance=RequestContext(request))
 
-
+@login_required
 def vote(request, poll_id):
 	p = get_object_or_404(Poll, pk=poll_id)
 	try:
@@ -36,7 +44,7 @@ def vote(request, poll_id):
 				p.has_voted_list += string_to_join
 				p.save()
 				selected_choice.save()
-				return HttpResponseRedirect(reverse('poll_results', args=(p.id,)))
+				return HttpResponseRedirect(reverse('poll.views.results', args=(p.id,)))
 
 def submit(request):
 	question = request.POST['question']

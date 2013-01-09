@@ -12,11 +12,11 @@ urlpatterns = patterns('',
 			DetailView.as_view(
 				model=Poll,
 				template_name='polls/detail.html')),
-		url(r'^(?P<pk>\d+)/results/$',
-			DetailView.as_view(
-				model=Poll,
-				template_name='polls/results.html'),
-			name='poll_results'),
+		url(r'^(?P<poll_id>\d+)/results/$','polls.views.results'),
+			#DetailView.as_view(
+			#	model=Poll,
+			#	template_name='polls/results.html'),
+			#name='poll_results'),
 		url(r'^(?P<poll_id>\d+)/vote/$','polls.views.vote'),
 		url(r'^test/$', 'polls.views.test_session'),
 		url(r'^submit/$', 'polls.views.submit'),

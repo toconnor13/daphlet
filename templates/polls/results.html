@@ -5,3 +5,10 @@
 		<li> {{ choice.choice}} -- {{ choice.votes}}  vote{{ choice.votes|pluralize}} </li>
 	{% endfor %}
 </ul>
+
+<p>The following have voted:</p>
+<ul>
+	{% for user in users %}
+		<li> {{user.username}}  </li>
+	{% endfor %}
+</ul>
