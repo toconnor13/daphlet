@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<link rel="stylesheet" href="{{STATIC_URL}}style.css" type="text/css" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
 		<title>{% block title %}Daphlet Polling{% endblock %}</title>
+
+		<!-- Les styles-->
+		<link rel="stylesheet" href="{{STATIC_URL}}style.css"  />
+		<link rel="shortcut icon" href="favicon.ico" />
+		<style type="type/css">
+			body {
+				padding-top: 60px;
+				padding-bottom: 40px;
+				padding-left: 40px;
+				padding-right: 40px;
+			}
+		</style>
 	</head>
 
 	<body>
-		<div id="content">
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+
+				<a class="brand" href="#">Daphlet Polling</a>
+
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="#">About Us</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div>
 			{% block content %}{% endblock %}
 		</div>
 	</body>

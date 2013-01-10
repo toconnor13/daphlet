@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
+<div class="span4">
 <h1>Register</h1>
 <form method="post" action="../accounts/register/">
 	{% csrf_token %}
@@ -13,7 +13,7 @@
 </div>
  
 
-
+<div class="span4">
 <h1>List of polls</h1>
 {% if latest_poll_list %}
 	<ul>
@@ -24,8 +24,10 @@
 
 {% else %}
 	<p>No polls are available.</p>
-{% endif %}
+	{% endif %}
+</div>
 
+<div class="span4">
 <h1>Submit a poll</h1>
 <form method="post" action="/polls/submit/">
 	{% csrf_token %}
@@ -35,5 +37,5 @@
 	<label>Choice 3:</label> <input type="text" name="choice_3"><br/>
 	<input type="submit" value="Submit poll">
 {% endblock %}
-
+</div>
 
