@@ -34,7 +34,7 @@ def vote(request, poll_id):
 			p.has_voted_list += string_to_join
 			p.save()
 			selected_choice.save()
-			return HttpResponseRedirect(reverse('poll_results', args=(p.id,)))
+			return HttpResponseRedirect(reverse('polls.views.results', args=(p.id,)))
 		else:
 			if request.user.id in eval(p.has_voted_list):
 				return HttpResponse('It seems you have already voted.')

@@ -7,6 +7,7 @@ from polls.models import Choice, Poll
 from django.contrib.auth import authenticate, login 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required 
+from django.conf import settings
 
 
 def register(request):
@@ -15,4 +16,4 @@ def register(request):
 	email = request.POST['email']
 	user = User.objects.create_user(username,email,  password)
 	user.save()
-	return HttpResponse("You have successfully registered.")
+	return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)

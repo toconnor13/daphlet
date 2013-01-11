@@ -36,6 +36,7 @@
 					<ul class="nav">
 						<li class="active"><a href="#">Home</a></li>
 						<li><a href="#">About Us</a></li>
+						<li><p>{% if user.is_authenticated %}Welcome, {{user.username}}, you are logged in.{% else %}You are not logged in.{% endif %} <p></li>
 					</ul>
 				</div>
 			</div>
