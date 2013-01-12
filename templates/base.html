@@ -6,6 +6,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<title>{% block title %}Daphlet Polling{% endblock %}</title>
+		<script type="text/javascript" src="{{STATIC_URL}}bootstrap.js"></script>
 
 		<!-- Les styles-->
 		<link rel="stylesheet" href="{{STATIC_URL}}style.css"  />
@@ -36,11 +37,25 @@
 					<ul class="nav">
 						<li class="active"><a href="#">Home</a></li>
 						<li><a href="#">About Us</a></li>
-						<li><p>{% if user.is_authenticated %}Welcome, {{user.username}}, you are logged in.{% else %}You are not logged in.{% endif %} <p></li>
 					</ul>
+					<!--Experimental section -->
+						<div class="pull-right" style="padding: 10px 0px 0px 10px;">
+							<p>{% if user.is_authenticated %}Welcome, {{user.username}}, you are logged in.{% else %}You are not logged in.{% endif %} </p>
+						</div>
+
+					<ul class="nav pull-right">
+						<li><a href="#">Sign Up</a></li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In<strong class="caret"></strong></a>
+							<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">				
+								<!-- Login form here -->
+							</div>
+						</li>
+					</ul>
+					
 				</div>
 			</div>
-		</div>
+			</div>
 		<div>
 			{% block content %}{% endblock %}
 		</div>
