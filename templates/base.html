@@ -46,15 +46,15 @@
 						<li><a href="#">Sign Up</a></li>
 						<li class="dropdown">
 							<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In<b class="caret"></b></a>
-							 <ul class="dropdown-menu">
-								  <li><a href="#">Action</a></li>
-								  <li><a href="#">Another action</a></li>
-								  <li><a href="#">Something else here</a></li>
-								  <li class="divider"></li>
-								  <li class="nav-header">Nav header</li>
-								  <li><a href="#">Separated link</a></li>
-								  <li><a href="#">One more separated link</a></li>
-                			</ul>
+							 <div class="dropdown-menu">
+								 <form method="post" action="../accounts/register/">
+	{% csrf_token %}
+	<input type="text" name="username" placeholder="Username"><br/>
+	<input type="text" name="email" placeholder="Email"><br/>
+	<input type="password" name="password" placeholder="Password"><br/>
+<input class="btn" type="submit" value="Register"/>
+</form> 
+                			</div>
 						</li>
 						<li style="padding: 10px 0px 0px 10px;">
 							<p>{% if user.is_authenticated %}Welcome, {{user.username}}, you are logged in.{% else %}You are not logged in.{% endif %} </p>
@@ -71,10 +71,6 @@
 
 
 		<script type="text/javascript">
-			$(function() {
-			  // Setup drop down menu
-			  $('.dropdown-toggle').dropdown();
-			 
 			  // Fix input element click problem
 			  $('.dropdown input, .dropdown label').click(function(e) {
 				e.stopPropagation();
