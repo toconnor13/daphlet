@@ -5,10 +5,10 @@
 <h1>Register</h1>
 <form method="post" action="../accounts/register/">
 	{% csrf_token %}
-	<label>Username:</label> <input type="text" name="username"><br/>
-	<label>Email:</label> <input type="text" name="email"><br/>
-	<label>Password:</label> <input type="text" name="password"><br/>
-<input type="submit" value="Register"/>
+	<input type="text" name="username" placeholder="Username"><br/>
+	<input type="text" name="email" placeholder="Email"><br/>
+	<input type="password" name="password" placeholder="Password"><br/>
+<input class="btn" type="submit" value="Register"/>
 </form>
 </div>
  
@@ -35,7 +35,27 @@
 	<label>Choice 1:</label> <input type="text" name="choice_1"><br/>
 	<label>Choice 2:</label> <input type="text" name="choice_2"><br/>
 	<label>Choice 3:</label> <input type="text" name="choice_3"><br/>
-	<input type="submit" value="Submit poll">
-{% endblock %}
+	<input class="btn" type="submit" value="Submit poll">
 </div>
+
+<div class="span4">
+	<form method="post" action=".">
+			{{ form.username }}
+			{{ form.password }}
+			{% if next %}
+				<input type="hidden" name="next" value="{{ next }}" />
+			{% else %}
+				<input type="hidden" name="next" value="/polls/" />
+			{% endif %}
+			<input class="btn" type="submit" value="Login" />
+	</form>
+</div>
+
+
+
+
+{% endblock %}
+
+
+
 

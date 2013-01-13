@@ -6,8 +6,10 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<title>{% block title %}Daphlet Polling{% endblock %}</title>
-		<script type="text/javascript" src="{{STATIC_URL}}bootstrap.js"></script>
-
+		<script src="{{STATIC_URL}}bootstrap.js"></script>
+		<script src="{{STATIC_URL}}bootstrap.min.js"></script>
+		<script src="{{STATIC_URL}}jquery.js"></script>
+		
 		<!-- Les styles-->
 		<link rel="stylesheet" href="{{STATIC_URL}}style.css"  />
 		<link rel="shortcut icon" href="favicon.ico" />
@@ -31,25 +33,28 @@
 					<span class="icon-bar"></span>
 				</a>
 
-				<a class="brand" href="#">Daphlet Polling</a>
+				<a class="brand">Daphlet Polling</a>
 
-				<div class="nav-collapse collapse">
+				<div class="nav-collapse">
 					<ul class="nav">
 						<li class="active"><a href="#">Home</a></li>
 						<li><a href="#">About Us</a></li>
 					</ul>
-					<!--Experimental section -->
-						<div class="pull-right" style="padding: 10px 0px 0px 10px;">
-							<p>{% if user.is_authenticated %}Welcome, {{user.username}}, you are logged in.{% else %}You are not logged in.{% endif %} </p>
-						</div>
+					
 
 					<ul class="nav pull-right">
 						<li><a href="#">Sign Up</a></li>
 						<li class="dropdown">
-							<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In<strong class="caret"></strong></a>
-							<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">				
+							<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In<b class="caret"></b></a>
+							<div class="dropdown-menu">				
+								<p>Something here</p>
+								<p>something else here.</p>
 								<!-- Login form here -->
+							
 							</div>
+						</li>
+						<li style="padding: 10px 0px 0px 10px;">
+							<p>{% if user.is_authenticated %}Welcome, {{user.username}}, you are logged in.{% else %}You are not logged in.{% endif %} </p>
 						</li>
 					</ul>
 					
@@ -59,5 +64,19 @@
 		<div>
 			{% block content %}{% endblock %}
 		</div>
+
+
+		<script type="text/javascript">
+			$(function() {
+			  // Setup drop down menu
+			  $('.dropdown-toggle').dropdown();
+			 
+			  // Fix input element click problem
+			  $('.dropdown input, .dropdown label').click(function(e) {
+				e.stopPropagation();
+			  });
+			});
+		</script>
 	</body>
-</html>
+</html>				
+
