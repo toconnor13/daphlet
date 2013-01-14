@@ -38,18 +38,6 @@
 	<input class="btn" type="submit" value="Submit poll">
 </div>
 
-<div class="span4">
-	<form method="post" action=".">
-			{{ form.username }}
-			{{ form.password }}
-			{% if next %}
-				<input type="hidden" name="next" value="{{ next }}" />
-			{% else %}
-				<input type="hidden" name="next" value="/polls/" />
-			{% endif %}
-			<input class="btn" type="submit" value="Login" />
-	</form>
-</div>
 
 
 
