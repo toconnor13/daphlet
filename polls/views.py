@@ -5,9 +5,20 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from polls.models import Choice, Poll
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+
+def index(request):
+	latest_poll_list = sorted(Poll.objects.all(), key=Poll.vote_count, reverse=True)
+	login_form = AuthenticationForm
+	register_form = UserCreationForm
+	return render_to_response('polls/index.html', {
+		'latest_poll_list': latest_poll_list,
+		'login_form': login_form,
+		'register_form': register_form,
+		}, context_instance=RequestContext(request))
 
 def results(request, poll_id):
 	p = get_object_or_404(Poll, pk=poll_id)

@@ -3,11 +3,11 @@ from django.views.generic import DetailView, ListView
 from polls.models import Poll
 
 urlpatterns = patterns('',
-		url(r'^$', 
-			ListView.as_view(
-				queryset = sorted(Poll.objects.all(), key=Poll.vote_count, reverse=True),
-				context_object_name='latest_poll_list',
-				template_name='polls/index.html')),
+		url(r'^$','polls.views.index'), 
+			#ListView.as_view(
+			#	queryset = sorted(Poll.objects.all(), key=Poll.vote_count, reverse=True),
+			#	context_object_name='latest_poll_list',
+			#	template_name='polls/index.html')),
 		url(r'^(?P<pk>\d+)/$',
 			DetailView.as_view(
 				model=Poll,

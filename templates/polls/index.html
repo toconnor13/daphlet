@@ -39,6 +39,32 @@
 </div>
 
 
+<div class="span4">
+	{% if form.errors %}
+		<p>Your username and password didn't match, try again.</p>
+	{% endif %}
+
+	<form method="post" action=".">
+		<p>
+			<label for="id_username">Username:</label>
+			{{ login_form.username}}
+		</p>
+		<p>
+			<label for="id_password">Password:</label>
+			{{ login_form.password }}
+		</p>
+		{% if next %}
+			<input type="hidden" name="next" value="{{ next }}"/>
+		{% else %}
+			<input type="hidden" name="next" value="/polls/" />
+		{% endif %}
+		<input type="submit" value="Login" />
+	</form>
+</div>
+
+
+
+</div>
 
 
 
