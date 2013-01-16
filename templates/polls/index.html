@@ -40,7 +40,7 @@
 
 
 <div class="span4">
-	{% if form.errors %}
+	{% if login_form.errors %}
 		<p>Your username and password didn't match, try again.</p>
 	{% endif %}
 
@@ -53,17 +53,8 @@
 			<label for="id_password">Password:</label>
 			{{ login_form.password }}
 		</p>
-		{% if next %}
-			<input type="hidden" name="next" value="{{ next }}"/>
-		{% else %}
-			<input type="hidden" name="next" value="/polls/" />
-		{% endif %}
 		<input type="submit" value="Login" />
 	</form>
-</div>
-
-
-
 </div>
 
 
