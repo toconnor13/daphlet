@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 from django.utils import timezone
+from django.forms import ModelForm
 
 # Create your models here.
 class Poll(models.Model):
@@ -31,3 +32,8 @@ class Choice(models.Model):
 
 	def __unicode__(self):
 		return self.choice
+
+class PollForm(ModelForm):
+	class Meta:
+		model=Poll
+
