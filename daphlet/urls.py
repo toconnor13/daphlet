@@ -17,6 +17,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/$', 'auth_views.login'),
     url(r'^accounts/register/$', 'accounts.views.register'),
+    url('^accounts/passwordreset', 'auth_views.password_reset'),
+    url('^acounts/password_reset_done','django.contrib.auth.views.password_reset_done'),
     url(r'^stylesheet/$', 'polls.views.stylesheet'),
     
 )
