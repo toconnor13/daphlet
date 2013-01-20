@@ -18,7 +18,9 @@ urlpatterns = patterns('',
     url(r'^login/$', 'auth_views.login'),
     url(r'^accounts/register/$', 'accounts.views.register'),
     url('^accounts/passwordreset', 'auth_views.password_reset'),
-    url('^acounts/password_reset_done','django.contrib.auth.views.password_reset_done'),
+    url('^accounts/password_reset_done','django.contrib.auth.views.password_reset_done'),
+    url('^accounts/password_reset_confirm','django.contrib.auth.views.password_reset_confirm'),
+    url('^accounts/logout','django.contrib.auth.views.logout'),
     url(r'^stylesheet/$', 'polls.views.stylesheet'),
     
 )
