@@ -24,10 +24,13 @@ def index(request):
 
 def results(request, poll_id):
 	p = get_object_or_404(Poll, pk=poll_id)
-	user_list = User.objects.all()
+	user_id_list = eval(p.has_voted_list)
+	username_list = []
+	for i in user_id_list:
+		username_list.append(User.objects.get(id=i))
 	return render_to_response('polls/results.html', {
 		'poll': p,
-		'users': user_list,
+		'users': username_list,
 		}, context_instance=RequestContext(request))
 
 @login_required

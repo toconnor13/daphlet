@@ -49,9 +49,9 @@
 						
 
 						<li class="dropdown">
-							<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In<b class="caret"></b></a>
+							<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign Up<b class="caret"></b></a>
 							 <div class="dropdown-menu" style="padding: 10px;">
-								<form method="post" action="../accounts/register/">
+								<form method="post" action="/accounts/register/">
 									{% csrf_token %}
 									<input type="text" name="username" placeholder="Username"/><br/>	
 									<input type="text" name="email" placeholder="Email"/><br/>
@@ -61,9 +61,12 @@
 							</div>
 						</li>
 
-						{% if user.is_authenticated %}
+						
 						<li>
+						{% if user.is_authenticated %}
 						<a href="/accounts/logout">Logout</a>
+						{% else %}
+						<a href="/login/">Login</a>
 						</li>
 						{% endif %}
 						
