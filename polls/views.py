@@ -9,6 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django import forms
 
 def index(request):
 	latest_poll_list = sorted(Poll.objects.all(), key=Poll.vote_count, reverse=True)
@@ -75,11 +76,16 @@ def submit(request):
 	p.save()
 	return HttpResponse("You have successfully created a poll.")
 
-
-@login_required
-def test_session(request):
-	return HttpResponse("Congratulations, you can access this user-restricted material.")
-
-def stylesheet(request):
-	return redirect('http://raw.github.com/Sheefrex/daphlet/master/templates/style.css')
+def register(request):
+	if request.method == 'POST':
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			new_user = form.save()
+			return HttpResponseRedirect("/polls/")
+	else:
+		form = UserCreationForm()
+	return render_to_response("registration/register.html", {
+		'form': form,},
+		context_instance=RequestContext(request)
+		)
 
