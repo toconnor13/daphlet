@@ -7,6 +7,12 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+AUTHENTICATION_BACKENDS = (
+		'emailusernames.backends.EmailAuthBackend',
+		# Uncomment the following line to make Django tests pass:
+		'django.contrib.auth.backends.ModelBackend',
+		)
+
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -119,10 +125,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
      'django.contrib.admin',
+     'emailusernames',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'polls',
-    'accounts',
 )
 
 LOGIN_REDIRECT_URL = ('/polls/')

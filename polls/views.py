@@ -10,16 +10,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django import forms
+from emailusernames.forms import EmailAuthenticationForm, EmailAdminAuthenticationForm, EmailUserCreationForm, EmailUserChangeForm
+
 
 def index(request):
 	latest_poll_list = sorted(Poll.objects.all(), key=Poll.vote_count, reverse=True)
 	#login_form = AuthenticationForm
-	register_form = UserCreationForm
-	poll_form = PollForm
+	register_form = EmailUserCreationForm
 	return render_to_response('polls/index.html', {
 		'latest_poll_list': latest_poll_list,
 	#	'login_form': login_form,
-		'poll_form': poll_form,
 		'register_form': register_form,
 		}, context_instance=RequestContext(request))
 
@@ -78,7 +78,7 @@ def submit(request):
 
 def register(request):
 	if request.method == 'POST':
-		form = UserCreationForm(request.POST)
+		form = EmailUserCreationForm(request.POST)
 		if form.is_valid():
 			new_user = form.save()
 			return HttpResponseRedirect("/polls/")

@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from emailusernames.forms import EmailAuthenticationForm
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -16,7 +17,8 @@ urlpatterns = patterns('',
     # url(r'^','polls.views.index'),
     url(r'^polls/', include('polls.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/$', 'django.contrib.auth.views.login'),
+    url(r'^login/$', 'django.contrib.auth.views.login', 
+	    {'authentication_form': EmailAuthenticationForm}, name='login'),
     url(r'^accounts/register/$', 'polls.views.register'),
     url(r'^accounts/passwordreset', 'django.contrib.auth.views.password_reset'),
     url(r'^accounts/password_reset_done','django.contrib.auth.views.password_reset_done'),
