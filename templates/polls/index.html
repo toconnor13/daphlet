@@ -1,17 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span4">
-<h1>Register</h1>
-<form method="post" action="../accounts/register/">
-	{% csrf_token %}
-	<input type="text" name="username" placeholder="Username"><br/>
-	<input type="text" name="email" placeholder="Email"><br/>
-	<input type="password" name="password" placeholder="Password"><br/>
-<input class="btn" type="submit" value="Register"/>
-</form>
+<div class="container">
+<div class="hero-unit">
+	<h1>
+		Welcome to Daphlet!  
+	</h1>
+	<p>Here, you can organise closed polls.  For example, you can restrict voting only to voters of an @tcd.ie email, or supply a list of emails addresses eligible in advance.
+
+	</p>
 </div>
- 
 
 <div class="span4">
 <h1>List of polls</h1>
@@ -28,6 +26,19 @@
 </div>
 
 <div class="span4">
+	<h1>Create a poll</h1>
+	<form method="post" action="/polls/create">
+		{% csrf_token %}
+		<input type="text" name="question" placeholder="Question"><br/>
+		<select name="no_of_choices" placeholder="How many choices?">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select><br/>
+		<input class="btn" type="submit" value="Next">
+		<div class="span4">
+
+<!--			
 <h1>Submit a poll</h1>
 <form method="post" action="/polls/submit/">
 	{% csrf_token %}
@@ -37,11 +48,11 @@
 	<label>Choice 3:</label> <input type="text" name="choice_3"><br/>
 	<input class="btn" type="submit" value="Submit poll">
 </div>
+-->
 
 
 
-
-
+</div>
 {% endblock %}
 
 

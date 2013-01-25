@@ -66,10 +66,11 @@
 
 
 <h2>A second attempt at a form</h2>
-
-<form action="" method="post">
+<div class="container">
+<form action="" method="post" class="form-signin">
 	{% csrf_token %}
 	{{ form.as_p }}
 	<input type="submit" value="Login">
 </form>
+</div>
 {% endblock %}
