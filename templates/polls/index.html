@@ -27,7 +27,7 @@
 
 <div class="span4">
 	<h1>Create a poll</h1>
-	<form method="post" action="/polls/create">
+	<form method="post" action="/polls/create_poll/">
 		{% csrf_token %}
 		<input type="text" name="question" placeholder="Question"><br/>
 		<select name="no_of_choices" placeholder="How many choices?">

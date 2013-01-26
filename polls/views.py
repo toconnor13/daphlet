@@ -89,3 +89,19 @@ def register(request):
 		context_instance=RequestContext(request)
 		)
 
+def create_poll(request):
+	question=request.POST['question']
+	no_of_choices = request.POST['no_of_choices']
+	i=0
+	choice_list = []
+	while i < int(no_of_choices):
+		choice_list.append('another_choice')
+		i += 1
+	p = Poll(question=question, pub_date=timezone.now())
+	p.save()
+	return render_to_response("polls/create_poll.html", {
+		'length_choiceform': choice_list,
+		'poll': p,},
+		context_instance=RequestContext(request)
+		)
+
