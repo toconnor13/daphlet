@@ -4,8 +4,12 @@
 
 <div class="span4">
 	<h1>{{ poll.question }}</h1>
-	{% for i in length_choiceform %}
-	<p>some</p>
-	{% endfor %}
-
+	<form method="post" action="polls/{{ poll.id }}/poll_complete">
+		{% csrf_token %}
+		<p>Create your choices:</p>
+		{% for choice in choicelist %}
+		<input type="text" name ="{{choice}}" placeholder="Choice">
+		{% endfor %}
+		<input class="btn" type="submit" value = "Add choices">
+	</form>
 {% endblock %}

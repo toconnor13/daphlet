@@ -93,15 +93,26 @@ def create_poll(request):
 	question=request.POST['question']
 	no_of_choices = request.POST['no_of_choices']
 	i=0
-	choice_list = []
+	choicelist = []
 	while i < int(no_of_choices):
-		choice_list.append('another_choice')
+		name = 'choice_' + str(i) 
+		choicelist.append(name)
 		i += 1
 	p = Poll(question=question, pub_date=timezone.now())
 	p.save()
 	return render_to_response("polls/create_poll.html", {
-		'length_choiceform': choice_list,
+		'choicelist': choicelist,
 		'poll': p,},
 		context_instance=RequestContext(request)
 		)
+
+def poll_complete(request, poll_id):
+	p = get_object_or_404(Poll, pk=poll_id)
+	choice_list = request.POST.values()
+	for option in choice_list:
+		p.choice_set.create(choice=option, votes=0)
+	p.save()
+	return HttpResponseRedirect("/polls/" + p.id + "/")
+
+
 
