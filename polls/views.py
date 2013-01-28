@@ -112,7 +112,6 @@ def poll_complete(request, poll_id):
 	for option in choice_list:
 		p.choice_set.create(choice=option, votes=0)
 	p.save()
-	return HttpResponseRedirect("/polls/" + p.id + "/")
-
+	return HttpResponse("the choices should be added.")
 
 
