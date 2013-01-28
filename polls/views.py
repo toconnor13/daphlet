@@ -15,13 +15,14 @@ from emailusernames.forms import EmailAuthenticationForm, EmailAdminAuthenticati
 
 def index(request):
 	latest_poll_list = sorted(Poll.objects.all(), key=Poll.vote_count, reverse=True)
-	#login_form = AuthenticationForm
 	register_form = EmailUserCreationForm
 	return render_to_response('polls/index.html', {
 		'latest_poll_list': latest_poll_list,
-	#	'login_form': login_form,
 		'register_form': register_form,
 		}, context_instance=RequestContext(request))
+
+def create_poll1(request):
+	return render_to_response('polls/create_poll1.html', context_instance=RequestContext(request))
 
 def results(request, poll_id):
 	p = get_object_or_404(Poll, pk=poll_id)
