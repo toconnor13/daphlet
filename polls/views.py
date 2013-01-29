@@ -21,9 +21,11 @@ def index(request):
 		'register_form': register_form,
 		}, context_instance=RequestContext(request))
 
+@login_required
 def create_poll1(request):
 	return render_to_response('polls/create_poll1.html', context_instance=RequestContext(request))
 
+@login_required
 def results(request, poll_id):
 	p = get_object_or_404(Poll, pk=poll_id)
 	user_id_list = eval(p.has_voted_list)
@@ -46,7 +48,7 @@ def vote(request, poll_id):
 			'error_message': "You didn't select a choice.",
 			}, context_instance=RequestContext(request))
 	else:
-		if p.has_voted_list == u'':
+		if p.has_voted_list == u'' or not request.user.id in eval(p.has_voted_list):
 			selected_choice.votes += 1
 			string_to_join = str(request.user.id)+','
 			p.has_voted_list += string_to_join
@@ -54,28 +56,8 @@ def vote(request, poll_id):
 			selected_choice.save()
 			return HttpResponseRedirect(reverse('polls.views.results', args=(p.id,)))
 		else:
-			if request.user.id in eval(p.has_voted_list):
 				return HttpResponse('It seems you have already voted.')
-			else:
-				selected_choice.votes += 1
-				string_to_join = str(request.user.id)+','
-				p.has_voted_list += string_to_join
-				p.save()
-				selected_choice.save()
-				return HttpResponseRedirect(reverse('poll.views.results', args=(p.id,)))
 
-def submit(request):
-	question = request.POST['question']
-	choice_1 = request.POST['choice_1']
-	choice_2 = request.POST['choice_2']
-	choice_3 = request.POST['choice_3']
-	p = Poll(question=question, pub_date=timezone.now())
-	p.save()
-	p.choice_set.create(choice=choice_1, votes=0)
-	p.choice_set.create(choice=choice_2, votes=0)
-	p.choice_set.create(choice=choice_3, votes=0)
-	p.save()
-	return HttpResponse("You have successfully created a poll.")
 
 def register(request):
 	if request.method == 'POST':
@@ -90,6 +72,7 @@ def register(request):
 		context_instance=RequestContext(request)
 		)
 
+@login_required
 def create_poll(request):
 	question=request.POST['question']
 	no_of_choices = request.POST['no_of_choices']
@@ -100,6 +83,7 @@ def create_poll(request):
 		choicelist.append(name)
 		i += 1
 	p = Poll(question=question, pub_date=timezone.now())
+	p.author = request.user.username
 	p.save()
 	return render_to_response("polls/create_poll.html", {
 		'choicelist': choicelist,
@@ -107,6 +91,7 @@ def create_poll(request):
 		context_instance=RequestContext(request)
 		)
 
+@login_required
 def poll_complete(request, poll_id):
 	p = get_object_or_404(Poll, pk=poll_id)
 	choice_list = request.POST.values()

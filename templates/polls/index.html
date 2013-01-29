@@ -26,34 +26,6 @@
 	{% endif %}
 </div>
 
-<div class="span4">
-	<h1>Create a poll</h1>
-	<form method="post" action="/polls/create_poll/">
-		{% csrf_token %}
-		<input type="text" name="question" placeholder="Question"><br/>
-		<select name="no_of_choices" placeholder="How many choices?">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-		</select><br/>
-		<input class="btn" type="submit" value="Next">
-		<div class="span4">
-
-<!--			
-<h1>Submit a poll</h1>
-<form method="post" action="/polls/submit/">
-	{% csrf_token %}
-	<label>Question:</label> <input type="text" name="question"><br/>
-	<label>Choice 1:</label> <input type="text" name="choice_1"><br/>
-	<label>Choice 2:</label> <input type="text" name="choice_2"><br/>
-	<label>Choice 3:</label> <input type="text" name="choice_3"><br/>
-	<input class="btn" type="submit" value="Submit poll">
-</div>
--->
-
-
-
-</div>
 {% endblock %}
 
 

@@ -6,6 +6,7 @@ from django.forms import ModelForm
 # Create your models here.
 class Poll(models.Model):
 	question = models.CharField(max_length=200)
+	author = models.CharField(max_length=200)
 	pub_date = models.DateTimeField('date_published')
 	has_voted_list = models.CommaSeparatedIntegerField(max_length=1000000)
 

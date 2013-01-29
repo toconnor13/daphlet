@@ -4,7 +4,7 @@
 
 <div class="span4">
 	<h1>{{ poll.question }}</h1>
-	<form method="post" action="/polls/{{ poll.id }}/poll_complete">
+	<form method="post" action="/polls/{{ poll.id }}/poll_complete/">
 		{% csrf_token %}
 		<p>Create your choices:</p>
 		{% for choice in choicelist %}

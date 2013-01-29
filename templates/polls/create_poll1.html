@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="span4">
+	<h1>Create a Poll</h1>
+	<form method="POST" action="/polls/create_poll/2/">
+		{% csrf_token %}
+		<input type="text" name="question" placeholder="Your question here">
+		<select name="no_of_choices" placeholder="How many choices?">
+			<option value="1">1</option>	
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+		<input class="btn" type="submit" value="Add some choices >>">
+
+{% endblock %}
