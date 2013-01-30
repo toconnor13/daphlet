@@ -94,7 +94,9 @@ def create_poll(request):
 @login_required
 def poll_complete(request, poll_id):
 	p = get_object_or_404(Poll, pk=poll_id)
-	choice_list = request.POST.values()
+	raw_choicedict = request.POST.copy()
+	del raw_choicedict['csrfmiddlewaretoken']
+	choice_list = raw_choicedict.values()
 	for option in choice_list:
 		p.choice_set.create(choice=option, votes=0)
 	p.save()
