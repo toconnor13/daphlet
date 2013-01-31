@@ -22,6 +22,11 @@ def index(request):
 		}, context_instance=RequestContext(request))
 
 @login_required
+def detail(request, poll_id):
+	p = get_object_or_404(Poll, pk=poll_id)
+	return render_to_response('polls/detail.html', {'poll': p,}, context_instance=RequestContext(request))
+
+@login_required
 def create_poll1(request):
 	return render_to_response('polls/create_poll1.html', context_instance=RequestContext(request))
 
