@@ -21,6 +21,12 @@ def index(request):
 		'register_form': register_form,
 		}, context_instance=RequestContext(request))
 
+def account(request):
+#	username = request.user.username
+	user_poll_list = Poll.objects.filter(author=request.user.username)
+	return render_to_response('polls/account.html', {'user_poll_list': user_poll_list,}, context_instance=RequestContext(request))
+
+
 @login_required
 def detail(request, poll_id):
 	p = get_object_or_404(Poll, pk=poll_id)
