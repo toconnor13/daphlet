@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>User Details</h1>
+
+<p>{{user.username}} </p>
+
+<h1>Polls Created</h1>
+	{% for poll in user_poll_list %}
+		<p><a href="/polls/{{poll.id}}/results/">{{ poll.question }}</a></p>
+	{% endfor %}
+
+{% endblock %}
