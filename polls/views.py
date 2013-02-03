@@ -87,6 +87,10 @@ def register(request):
 def create_poll(request):
 	question=request.POST['question']
 	no_of_choices = request.POST['no_of_choices']
+	restrict_choice = request.POST['restrict_choice']
+	restricted = False
+	if eval(restrict_choice) == 1:
+		restricted = True
 	i=0
 	choicelist = []
 	while i < int(no_of_choices):
@@ -98,7 +102,8 @@ def create_poll(request):
 	p.save()
 	return render_to_response("polls/create_poll.html", {
 		'choicelist': choicelist,
-		'poll': p,},
+		'poll': p,
+		'restricted': restricted,},
 		context_instance=RequestContext(request)
 		)
 

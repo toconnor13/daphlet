@@ -9,6 +9,7 @@ class Poll(models.Model):
 	author = models.CharField(max_length=200)
 	pub_date = models.DateTimeField('date_published')
 	has_voted_list = models.CommaSeparatedIntegerField(max_length=1000000)
+	restrict_to_domain = models.CharField(max_length=200, default="None")
 
 	def __unicode__(self):
 		return self.question

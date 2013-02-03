@@ -8,8 +8,24 @@
 		{% csrf_token %}
 		<p>Create your choices:</p>
 		{% for choice in choicelist %}
-		<input type="text" name ="{{choice}}" placeholder="Choice">
+		<label>Choice</label> <input type="text" name ="{{choice}}" placeholder="Choice">
 		{% endfor %}
+		{% if restricted %}
+		<input type="text" name="restricted_domain" placeholder="@example.com">
+		{% endif %}
 		<input class="btn" type="submit" value = "Add choices">
 	</form>
+</div>
+
+
+<div>
+{% if restricted %}
+<p>This poll is restricted</p>
+{% else %}
+<p>this poll is not restricted.</p>
+{% endif %}
+</div>
+
+
+
 {% endblock %}
