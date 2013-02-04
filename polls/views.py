@@ -87,9 +87,8 @@ def register(request):
 def create_poll(request):
 	question=request.POST['question']
 	no_of_choices = request.POST['no_of_choices']
-	restrict_choice = request.POST['restrict_choice']
 	restricted = False
-	if eval(restrict_choice) == 1:
+	if 'restrict_choice' in request.POST:
 		restricted = True
 	i=0
 	choicelist = []
@@ -97,21 +96,26 @@ def create_poll(request):
 		name = 'choice_' + str(i) 
 		choicelist.append(name)
 		i += 1
-	p = Poll(question=question, pub_date=timezone.now())
-	p.author = request.user.username
-	p.save()
+#	p = Poll(question=question, pub_date=timezone.now())
+#	p.author = request.user.username
+#	p.save()
 	return render_to_response("polls/create_poll.html", {
+		'question': question,
 		'choicelist': choicelist,
-		'poll': p,
+#		'poll': p,
 		'restricted': restricted,},
 		context_instance=RequestContext(request)
 		)
 
 @login_required
-def poll_complete(request, poll_id):
-	p = get_object_or_404(Poll, pk=poll_id)
+def poll_complete(request):
+	question = request.POST['question']
+	p = Poll(question=question, pub_date=timezone.now())
+	p.author = request.user.username
+	p.save()
 	raw_choicedict = request.POST.copy()
 	del raw_choicedict['csrfmiddlewaretoken']
+	del raw_choicedict['question']
 	choice_list = raw_choicedict.values()
 	for option in choice_list:
 		p.choice_set.create(choice=option, votes=0)

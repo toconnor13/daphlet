@@ -3,9 +3,10 @@
 {% block content %}
 
 <div class="span4">
-	<h1>{{ poll.question }}</h1>
-	<form method="post" action="/polls/{{ poll.id }}/poll_complete/">
+	<h1>{{ question }}</h1>
+	<form method="post" action="/polls/poll_complete/">
 		{% csrf_token %}
+		<label>Question:</label><input type="text" name="question" value="{{question}}">
 		<p>Create your choices:</p>
 		{% for choice in choicelist %}
 		<label>Choice</label> <input type="text" name ="{{choice}}" placeholder="Choice">

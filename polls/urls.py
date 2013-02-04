@@ -11,7 +11,7 @@ urlpatterns = patterns('',
 		url(r'^(?P<poll_id>\d+)/results/$','polls.views.results'),
 		url(r'^(?P<poll_id>\d+)/vote/$','polls.views.vote'),
 		url(r'^create_poll/2/$', 'polls.views.create_poll'),
-		url(r'^(?P<poll_id>\d+)/poll_complete/$', 'polls.views.poll_complete'),
+		url(r'^poll_complete/$', 'polls.views.poll_complete'),
 		url(r'^create_poll/1/$', 'polls.views.create_poll1'),
 		url(r'^user/account/$', 'polls.views.account'),
 		)
