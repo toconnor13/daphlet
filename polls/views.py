@@ -22,7 +22,6 @@ def index(request):
 		}, context_instance=RequestContext(request))
 
 def account(request):
-#	username = request.user.username
 	user_poll_list = Poll.objects.filter(author=request.user.username)
 	return render_to_response('polls/account.html', {'user_poll_list': user_poll_list,}, context_instance=RequestContext(request))
 
@@ -32,9 +31,6 @@ def detail(request, poll_id):
 	p = get_object_or_404(Poll, pk=poll_id)
 	return render_to_response('polls/detail.html', {'poll': p,}, context_instance=RequestContext(request))
 
-@login_required
-def create_poll1(request):
-	return render_to_response('polls/create_poll1.html', context_instance=RequestContext(request))
 
 @login_required
 def results(request, poll_id):
@@ -83,8 +79,13 @@ def register(request):
 		context_instance=RequestContext(request)
 		)
 
+
 @login_required
-def create_poll(request):
+def create_poll1(request):
+	return render_to_response('polls/create_poll1.html', context_instance=RequestContext(request))
+
+@login_required
+def create_poll2(request):
 	question=request.POST['question']
 	no_of_choices = request.POST['no_of_choices']
 	restricted = False
@@ -96,26 +97,26 @@ def create_poll(request):
 		name = 'choice_' + str(i) 
 		choicelist.append(name)
 		i += 1
-#	p = Poll(question=question, pub_date=timezone.now())
-#	p.author = request.user.username
-#	p.save()
-	return render_to_response("polls/create_poll.html", {
+	return render_to_response("polls/create_poll2.html", {
 		'question': question,
 		'choicelist': choicelist,
-#		'poll': p,
 		'restricted': restricted,},
 		context_instance=RequestContext(request)
 		)
+
 
 @login_required
 def poll_complete(request):
 	question = request.POST['question']
 	p = Poll(question=question, pub_date=timezone.now())
 	p.author = request.user.username
+	if 'restricted_domain' in request.POST:
+		p.restrict_to_domain = request.POST['restricted_domain']
 	p.save()
 	raw_choicedict = request.POST.copy()
 	del raw_choicedict['csrfmiddlewaretoken']
 	del raw_choicedict['question']
+	del raw_choicedict['restricted_domain']
 	choice_list = raw_choicedict.values()
 	for option in choice_list:
 		p.choice_set.create(choice=option, votes=0)
