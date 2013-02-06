@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django import forms
 from emailusernames.forms import EmailAuthenticationForm, EmailAdminAuthenticationForm, EmailUserCreationForm, EmailUserChangeForm
+import re
 
 
 def index(request):
@@ -55,15 +56,18 @@ def vote(request, poll_id):
 			'error_message': "You didn't select a choice.",
 			}, context_instance=RequestContext(request))
 	else:
-		if p.has_voted_list == u'' or not request.user.id in eval(p.has_voted_list):
-			selected_choice.votes += 1
-			string_to_join = str(request.user.id)+','
-			p.has_voted_list += string_to_join
-			p.save()
-			selected_choice.save()
-			return HttpResponseRedirect(reverse('polls.views.results', args=(p.id,)))
-		else:
+		if re.search(p.restrict_to_domain, request.user.username):
+			if p.has_voted_list == u'' or not request.user.id in eval(p.has_voted_list):
+				selected_choice.votes += 1
+				string_to_join = str(request.user.id)+','
+				p.has_voted_list += string_to_join
+				p.save()
+				selected_choice.save()
+				return HttpResponseRedirect(reverse('polls.views.results', args=(p.id,)))
+			else:
 				return HttpResponse('It seems you have already voted.')
+		else:
+			return HttpResponse('You are not allowed to vote on this poll.')
 
 
 def register(request):
