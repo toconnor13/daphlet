@@ -56,7 +56,9 @@ def vote(request, poll_id):
 			'error_message': "You didn't select a choice.",
 			}, context_instance=RequestContext(request))
 	else:
-		if re.search(p.restrict_to_domain, request.user.username):
+		if p.restrict_to_domain == u'None' or re.search(p.restrict_to_domain, request.user.username):
+#			except KeyError:
+#				pass
 			if p.has_voted_list == u'' or not request.user.id in eval(p.has_voted_list):
 				selected_choice.votes += 1
 				string_to_join = str(request.user.id)+','
@@ -120,7 +122,8 @@ def poll_complete(request):
 	raw_choicedict = request.POST.copy()
 	del raw_choicedict['csrfmiddlewaretoken']
 	del raw_choicedict['question']
-	del raw_choicedict['restricted_domain']
+	if 'restricted_domain' in raw_choicedict:
+		del raw_choicedict['restricted_domain']
 	choice_list = raw_choicedict.values()
 	for option in choice_list:
 		p.choice_set.create(choice=option, votes=0)
