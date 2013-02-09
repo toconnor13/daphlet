@@ -4,13 +4,17 @@
 {% block content %}
 
 
-<h2>A second attempt at a form</h2>
 <div class="container">
-<form action="" method="post" class="form-signin">
-	{% csrf_token %}
-	{{ form.as_p }}
-	<input type="submit" value="Login">
-</form>
+	<div class="row">
+		<div class="offset2 span4">
+			<h2>Login Form</h2>
+			<form action="" method="post" class="form-signin">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<input type="submit" value="Login">
+			</form>
+		</div>
+	</div>
 </div>
 
 {% endblock %}
