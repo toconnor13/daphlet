@@ -22,6 +22,9 @@ def index(request):
 		'register_form': register_form,
 		}, context_instance=RequestContext(request))
 
+def contact(request):
+	return render_to_response('polls/contact.html', context_instance=RequestContext(request))
+
 def account(request):
 	user_poll_list = Poll.objects.filter(author=request.user.username)
 	return render_to_response('polls/account.html', {'user_poll_list': user_poll_list,}, context_instance=RequestContext(request))
