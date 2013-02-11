@@ -4,15 +4,29 @@
 
 <div class="span4">
 	<h1>{{ question }}</h1>
-	<form method="post" action="/polls/poll_complete/">
+	<form class="form-horizontal "method="post" action="/polls/poll_complete/">
 		{% csrf_token %}
-		<label>Question:</label><input type="text" name="question" value="{{question}}">
-		<p>Create your choices:</p>
+		<div class="control-group">
+			<label class="control-label">Question:</label>
+			<div class="controls">
+				<input type="text" name="question" value="{{question}}">
+			</div>
+		</div>
+
 		{% for choice in choicelist %}
-		<label>Choice</label> <input type="text" name ="{{choice}}" placeholder="Choice">
+		<div class="control-group">
+				<label class="control-label">Choice</label>
+				<div class="controls">
+					<input type="text" name ="{{choice}}" placeholder="Choice">
+				</div>
+		</div>
 		{% endfor %}
+
+
 		{% if restricted %}
-		<input type="text" name="restricted_domain" placeholder="@example.com">
+			<div class="input-prepend">
+				<span class="add-on">@</span>
+				<input class="span2" type="text" name="restricted_domain" placeholder="example.com">
 		{% endif %}
 		<input class="btn" type="submit" value = "Add choices">
 	</form>

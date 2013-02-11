@@ -2,23 +2,40 @@
 
 {% block content %}
 
-<div class="span6">
 	<h1>Create a Poll</h1>
-	<form method="POST" action="/polls/create_poll/2/">
+	<form method="POST" action="/polls/create_poll/2/" class="form-horizontal">
 		{% csrf_token %}
-		<input type="text" name="question" placeholder="Your question here">
-		<select name="no_of_choices" placeholder="How many choices?">
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-		</select>
-		<br/>
-		<input type="checkbox" name="restrict_choice" value="1"><p>Restrict to some email adresses only (e.g. someone@tcd.ie)</p>
-		<input class="btn" type="submit" value="Add some choices >>">
+		<div class="control-group">
+			<label class="control-label">Question</label>
+			<div class="controls">
+				<input type="text" name="question" placeholder="Your question here">
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label">Password</label>
+			<div class="controls">
+				<select name="no_of_choices" placeholder="How many choices?">
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="control-group">
+		<div class="controls">
+			<label class="checkbox">
+				<input type="checkbox" name="restrict_choice" value="1">Restrict to some email adresses only (e.g. someone@tcd.ie)
+			</label>
+			<input class="btn" type="submit" value="Add some choices >>">
+		</div>
+		</div>
+	
 
 {% endblock %}
