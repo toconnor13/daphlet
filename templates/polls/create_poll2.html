@@ -17,18 +17,29 @@
 		<div class="control-group">
 				<label class="control-label">Choice</label>
 				<div class="controls">
-					<input type="text" name ="{{choice}}" placeholder="Choice">
+					<input type="text" name ="{{choice}} " placeholder="Choice">
 				</div>
 		</div>
 		{% endfor %}
 
 
 		{% if restricted %}
-			<div class="input-prepend">
-				<span class="add-on">@</span>
-				<input class="span2" type="text" name="restricted_domain" placeholder="example.com">
+			<div class="control-group">
+				<label class="control-label">Restriction</label>
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on">@</span>
+						<input class="span2" type="text" name="restricted_domain" placeholder="example.com">
+					</div>
+				</div>
+			</div>
 		{% endif %}
-		<input class="btn" type="submit" value = "Add choices">
+		
+		<div class="control-group">
+			<div class="controls">
+				<input class="btn btn-large btn-primary" type="submit" value = "Publish poll">
+			</div>
+		</div>
 	</form>
 </div>
 
