@@ -131,6 +131,6 @@ def poll_complete(request):
 	for option in choice_list:
 		p.choice_set.create(choice=option, votes=0)
 	p.save()
-	return HttpResponseRedirect(reverse('polls.views.vote', args=(p.id,)))
+	return HttpResponseRedirect(reverse('polls.views.detail', args=(p.id,)))
 
 
