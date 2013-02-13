@@ -1,13 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>User Details</h1>
 
-<p>{{user.username}} </p>
+<dl class="dl-horizontal">
+	<h3>User Details</h3>
+	<dt>Email</dt>
+	<dd>{{user.username}}</dd>
+</dl>
 
 <h1>Polls Created</h1>
-	{% for poll in user_poll_list %}
-		<p><a href="/polls/{{poll.id}}/results/">{{ poll.question }}</a></p>
-	{% endfor %}
+
+<table class="table">
+	<thead>
+		<th>ID</th>
+		<th>Question</th>
+	</thead>
+
+	<tbody>
+		{% for poll in user_poll_list %}
+		<tr>
+			<td>{{poll.id}}</td>
+				<td><a href="/polls/{{poll.id}}/results/">{{ poll.question }}</a></td>
+			</tr>
+			{% endfor %}
+	</tbody>
+</table>
 
 {% endblock %}
