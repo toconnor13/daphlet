@@ -20,8 +20,9 @@
 		{% for poll in user_poll_list %}
 		<tr>
 			<td>{{poll.id}}</td>
-				<td><a href="/polls/{{poll.id}}/results/">{{ poll.question }}</a></td>
-			</tr>
+			<td><a href="/polls/{{poll.id}}/results/">{{ poll.question }}</a></td>
+			<td><a href="/polls/{{poll.id}}/delete/">Delete</a></td>
+		</tr>
 			{% endfor %}
 	</tbody>
 </table>
