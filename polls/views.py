@@ -133,10 +133,10 @@ def poll_complete(request):
 	p.save()
 	return HttpResponseRedirect(reverse('polls.views.detail', args=(p.id,)))
 
-def poll_delete(request, poll_id):
+def delete(request, poll_id):
 	p = Poll.objects.get(id=poll_id)
-	if p.author == request.user:
+	if p.author == request.user.username:
 		p.delete()
 		return HttpResponse("it's gone.")
 	else:
-		return HttpResponse("you can't deleta this.")
+		return HttpResponse("you can't delete this.")
