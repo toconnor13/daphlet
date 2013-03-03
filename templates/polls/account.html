@@ -2,18 +2,21 @@
 
 {% block content %}
 
+<!---
 <dl class="dl-horizontal">
-	<h3>User Details</h3>
 	<dt>Email</dt>
 	<dd>{{user.username}}</dd>
 </dl>
+--!>
 
-<h1>Polls Created</h1>
-<div class="container">
-<table class="table">
+<div class="container" >
+	<h3>Polls Created</h3>
+
+<table class="table table-bordered table-condensed" style="margin: 30px;" >
 	<thead>
 		<th>ID</th>
 		<th>Question</th>
+		<th>Delete Poll?</th>
 	</thead>
 
 	<tbody>
