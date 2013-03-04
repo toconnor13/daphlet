@@ -134,6 +134,16 @@ INSTALLED_APPS = (
 LOGIN_REDIRECT_URL = ('/polls/')
 LOGIN_URL = ('/login/')
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# DEFAULT_FROM_EMAIL = 'daphlet.polls@gmail.com'
+# SERVER_EMAIL = 'toconnor13@gmail.com'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'daphlet.polls@gmail.com'
+EMAIL_HOST_PASSWORD = 'daphlet123'
+EMAIL_PORT = 587
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
