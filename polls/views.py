@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.utils import timezone
 from django import forms
 from emailusernames.forms import EmailAuthenticationForm, EmailAdminAuthenticationForm, EmailUserCreationForm, EmailUserChangeForm
@@ -131,6 +132,9 @@ def poll_complete(request):
 	for option in choice_list:
 		p.choice_set.create(choice=option, votes=0)
 	p.save()
+
+	message = "You have just created a new poll on Daphlet."
+	send_mail('New poll created', message, 'daphlet.polls@gmail.com', [request.user.username], fail_silently=False)
 	return HttpResponseRedirect(reverse('polls.views.detail', args=(p.id,)))
 
 def delete(request, poll_id):
