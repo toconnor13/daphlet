@@ -8,7 +8,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
+from django.core.mail.message import EmailMessage
 from django.utils import timezone
 from django import forms
 from emailusernames.forms import EmailAuthenticationForm, EmailAdminAuthenticationForm, EmailUserCreationForm, EmailUserChangeForm
@@ -133,8 +134,13 @@ def poll_complete(request):
 		p.choice_set.create(choice=option, votes=0)
 	p.save()
 
-	message = "You have just created a new poll on Daphlet."
-	send_mail('New poll created', message, 'daphlet.polls@gmail.com', [request.user.username], fail_silently=False)
+	html_content = "<p>You have just created a new poll on <a href=www.ft.com>Daphlet</a>.</p> <p>The poll title is " + p.question + ".</p>"
+	msg = EmailMessage('New Poll Created', html_content, 'daphlet.polls@tcd.ie', [request.user.username])
+	msg.content_subtype = "html"
+	msg.send()
+
+#	message = "You have just created a new poll on Daphlet."
+#	send_mail('New poll created', message, 'daphlet.polls@gmail.com', [request.user.username], fail_silently=False)
 	return HttpResponseRedirect(reverse('polls.views.detail', args=(p.id,)))
 
 def delete(request, poll_id):
