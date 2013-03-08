@@ -126,17 +126,20 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
      'django.contrib.admin',
      'emailusernames',
+     'registration',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'polls',
 )
+
+ACCOUNT_ACTIVATION_DAYS = 7
 
 LOGIN_REDIRECT_URL = ('/polls/')
 LOGIN_URL = ('/login/')
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # DEFAULT_FROM_EMAIL = 'daphlet.polls@gmail.com'
-# SERVER_EMAIL = 'toconnor13@gmail.com'
+SERVER_EMAIL = 'daphlet.polls@gmail.com'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
