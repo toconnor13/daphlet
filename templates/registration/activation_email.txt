@@ -1,0 +1,4 @@
+To activate your Daphlet account, please click on the following link within
+{{ expiration_days }} days.
+
+{{ activation_key }}
