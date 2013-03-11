@@ -1,13 +1,11 @@
-{% extends "admin/base_site.html" %}
-{% load i18n %}
-{% load url from future %}
+{% extends "base.html" %}
 
-{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></div>{% endblock %}
 
 {% block content %}
 
-<p>{% trans "Thanks for spending some quality time with the Web site today." %}</p>
+<div class="container">
+	<p>You have successfully logged out.</p>
 
-<p><a href="{% url 'admin:index' %}">{% trans 'Log in again' %}</a></p>
+</div>
 
 {% endblock %}
