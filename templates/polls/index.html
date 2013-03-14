@@ -3,28 +3,26 @@
 {% block content %}
 <div class="container">
 <div class="hero-unit">
-	<h1>
-		Welcome to Daphlet!  
-	</h1>
-	<p>Here, you can organise closed polls.  For example, you can restrict voting only to voters of an @tcd.ie email, or supply a list of emails addresses eligible in advance.
+	<h1>Welcome to Daphlet!</h1>
 
-	</p>
-	<p><a href="/polls/create_poll/1/"class="btn btn-primary btn-large">Create a poll</a></p>
+	<p>Here, you can organise closed polls.  For example, you can restrict voting only to voters of an @tcd.ie email, or supply a list of emails addresses eligible in advance.</p>
+	<p><a href="/polls/create_poll/1/"class="btn btn-primary btn-large">Create a poll >></a></p>
+</div>
 </div>
 
 <div class="span4">
-<h1>List of polls</h1>
-{% if latest_poll_list %}
-	<ul>
-		{% for poll in latest_poll_list %}
-		<li> <a href = "/polls/{{poll.id}}/" >{{poll.question}}</a> -- {{ poll.vote_count }} vote{{poll.vote_count|pluralize }} cast </li>
-		{% endfor %}
-	</ul>
+	<h2>Create a Poll</h2>
+	<p>Create a poll. Then, we will email you the link, which you can send on to whoever you want. You can see who votes, but not how they vote - all polls are anonymous.</p>
 
-{% else %}
-	<p>No polls are available.</p>
-	{% endif %}
 </div>
+
+<div class="span4">
+	<h2>Control Who Votes</h2>
+	<p>You can restrict what email accounts are allowed to vote - all you need to do is provide us with the domain e.g. @gmail.com will allow only those with a gmail account to vote.</p>
+</div>
+
+
+
 
 {% endblock %}
 

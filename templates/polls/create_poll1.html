@@ -2,9 +2,10 @@
 
 {% block content %}
 
-	<h1>Create a Poll</h1>
 	<form method="POST" action="/polls/create_poll/2/" class="form-horizontal">
 		{% csrf_token %}
+
+			<h1 style="margin: 30px 100px;">Create a Poll</h1>
 		<div class="control-group">
 			<label class="control-label">Question</label>
 			<div class="controls">
@@ -31,7 +32,7 @@
 		<div class="control-group">
 		<div class="controls">
 			<label class="checkbox">
-				<input type="checkbox" name="restrict_choice" value="1">Restrict to some email adresses only (e.g. someone@tcd.ie)
+				<input type="checkbox" name="restrict_choice" value="1">Control who votes (e.g. only those with a @tcd.ie email)
 			</label>
 			<input class="btn" type="submit" value="Add some choices >>">
 		</div>
