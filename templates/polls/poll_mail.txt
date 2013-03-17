@@ -1,0 +1,11 @@
+Hi there,
+
+You've just created a new poll on Daphlet.
+
+To vote, go here: www.daphlet.com/polls/{{ poll_id }}/vote
+
+To see the results, go here: www.daphlet.com/polls/{{ poll_id }}/results
+
+To delete the poll, go here: www.daphlet.com/polls/user/account/
+
+Good luck!

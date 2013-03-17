@@ -2,7 +2,8 @@
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from django.template import RequestContext
+from django.template import RequestContext, Context
+from django.template.loader import get_template
 from polls.models import Choice, Poll, PollForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -134,13 +135,15 @@ def poll_complete(request):
 		p.choice_set.create(choice=option, votes=0)
 	p.save()
 
-	html_content = "<p>You have just created a new poll on <a href=www.ft.com>Daphlet</a>.</p> <p>The poll title is " + p.question + ".</p>"
-	msg = EmailMessage('New Poll Created', html_content, 'daphlet.polls@tcd.ie', [request.user.username])
-	msg.content_subtype = "html"
+
+	poll_message = get_template('polls/poll_mail.txt')
+	
+	d = Context({ 'poll_id': p.id })
+	text_content = poll_message.render(d)
+	msg = EmailMessage('New Poll Created', text_content, 'daphlet.polls@tcd.ie', [request.user.username])
+#	msg.content_subtype = "text"
 	msg.send()
 
-#	message = "You have just created a new poll on Daphlet."
-#	send_mail('New poll created', message, 'daphlet.polls@gmail.com', [request.user.username], fail_silently=False)
 	return HttpResponseRedirect(reverse('polls.views.detail', args=(p.id,)))
 
 def delete(request, poll_id):
