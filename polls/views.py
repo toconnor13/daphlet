@@ -42,7 +42,14 @@ def detail(request, poll_id):
 @login_required
 def results(request, poll_id):
 	p = get_object_or_404(Poll, pk=poll_id)
-	user_id_list = eval(p.has_voted_list)
+	try:
+		user_id_list = eval(p.has_voted_list)
+	except:
+		return render_to_response('polls/detail.html', {
+			'poll': p,
+			'error_message': "There are no votes to count, so no results to see!",
+			}, context_instance=RequestContext(request))
+
 	username_list = []
 	for i in user_id_list:
 		username_list.append(User.objects.get(id=i))
@@ -63,8 +70,6 @@ def vote(request, poll_id):
 			}, context_instance=RequestContext(request))
 	else:
 		if p.restrict_to_domain == u'None' or re.search(p.restrict_to_domain, request.user.username):
-#			except KeyError:
-#				pass
 			if p.has_voted_list == u'' or not request.user.id in eval(p.has_voted_list):
 				selected_choice.votes += 1
 				string_to_join = str(request.user.id)+','
@@ -75,7 +80,10 @@ def vote(request, poll_id):
 			else:
 				return HttpResponse('It seems you have already voted.')
 		else:
-			return HttpResponse('You are not allowed to vote on this poll.')
+			return render_to_response('polls/detail.html', {
+				'poll': p,
+				'error_message': 'You are not allowed to vote on the poll!',
+				}, context_instance=RequestContext(request))
 
 
 def register(request):
@@ -150,6 +158,6 @@ def delete(request, poll_id):
 	p = Poll.objects.get(id=poll_id)
 	if p.author == request.user.username:
 		p.delete()
-		return HttpResponse("it's gone.")
+		return HttpResponse("It's gone.")
 	else:
-		return HttpResponse("you can't delete this.")
+		return HttpResponse("You can't delete this.")
