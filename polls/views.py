@@ -69,7 +69,7 @@ def vote(request, poll_id):
 			'error_message': "You didn't select a choice.",
 			}, context_instance=RequestContext(request))
 	else:
-		if p.restrict_to_domain == u'None' or re.search(p.restrict_to_domain, request.user.username):
+		if p.restrict_to_domain == u'None' or re.search(p.restrict_to_domain, request.user.username):# or request.user.username in list_of_emails:
 			if p.has_voted_list == u'' or not request.user.id in eval(p.has_voted_list):
 				selected_choice.votes += 1
 				string_to_join = str(request.user.id)+','
