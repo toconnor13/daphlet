@@ -61,7 +61,6 @@ def results(request, poll_id):
 @login_required
 def vote(request, poll_id):
 	p = get_object_or_404(Poll, pk=poll_id)
-	list_of_emails = p.restrict_to_emails.split(',')
 	try:
 		selected_choice = p.choice_set.get(pk=request.POST['choice'])
 	except (KeyError, Choice.DoesNotExist):
@@ -70,7 +69,7 @@ def vote(request, poll_id):
 			'error_message': "You didn't select a choice.",
 			}, context_instance=RequestContext(request))
 	else:
-		if p.restrict_to_domain == u'None' or re.search(p.restrict_to_domain, request.user.username) or request.user.username in list_of_emails:
+		if p.restrict_to_domain == u'None' or re.search(p.restrict_to_domain, request.user.username) or request.user.username in p.restrict_to_emails:
 			if p.has_voted_list == u'' or not request.user.id in eval(p.has_voted_list):
 				selected_choice.votes += 1
 				string_to_join = str(request.user.id)+','
@@ -112,7 +111,7 @@ def create_poll2(request):
 	restricted_by_domain = False
 	restricted_by_list = False
 	if 'restrict_choice' in request.POST:
-		restricted = True
+		restricted_by_domain = True
 	if 'emails_restrict' in request.POST:
 		restricted_by_list = True
 	i=0
@@ -124,7 +123,7 @@ def create_poll2(request):
 	return render_to_response("polls/create_poll2.html", {
 		'question': question,
 		'choicelist': choicelist,
-		'restricted': restricted,
+		'restricted': restricted_by_domain,
 		'restricted_by_list': restricted_by_list,
 		},
 		context_instance=RequestContext(request)
@@ -141,7 +140,8 @@ def poll_complete(request):
 		p.restrict_to_domain = request.POST['restricted_domain']
 		del raw_choicedict['restricted_domain']
 	if 'email_list' in request.POST:
-		p.restrict_to_emails = request.POST['email_list']
+		p.restrict_to_emails = raw_choicedict['email_list'].split(',')
+		p.restrict_to_domain = u'Invalid'
 		del raw_choicedict['email_list']
 	p.save()
 	del raw_choicedict['csrfmiddlewaretoken']
