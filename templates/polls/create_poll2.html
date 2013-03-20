@@ -23,20 +23,28 @@
 		{% endfor %}
 
 
-		{% if restricted %}
+		{% if restricted or restricted_by_list %}
 			<div class="control-group">
-				<label class="control-label">Restriction</label>
+				<label class="control-label">Email restriction</label>
 				<div class="controls">
 					<div class="input-prepend">
-						<span class="add-on">@</span>
+						{% if restricted %}
 						<input class="span2" type="text" name="restricted_domain" placeholder="example.com">
+						{% else %}
+						<textarea  rows="3" name="email_list" placeholder="email1@example.com, email2@example.com, email3@example.com"></textarea>
+						{% endif %}
 					</div>
 				</div>
 			</div>
 		{% endif %}
 
+<<<<<<< HEAD
 
 		Add text box here
+=======
+		
+		
+>>>>>>> v2
 		
 		<div class="control-group">
 			<div class="controls">
