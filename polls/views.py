@@ -167,7 +167,11 @@ def poll_complete(request):
 def delete(request, poll_id):
 	p = Poll.objects.get(id=poll_id)
 	if p.author == request.user.username:
+		message = 'You have deleted the poll " ' + p.question + ' ".'
 		p.delete()
-		return HttpResponse("It's gone.")
+		user_poll_list = Poll.objects.filter(author=request.user.username)
+		return render_to_response('polls/account.html', {'user_poll_list': user_poll_list, 'message':message,}, context_instance=RequestContext(request))
+	
+	# HttpResponse("It's gone.")
 	else:
 		return HttpResponse("You can't delete this.")
