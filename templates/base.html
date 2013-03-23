@@ -60,18 +60,26 @@
 						</li>
 						{% else %}
 						<a href="/login/">Login</a>
+
 						</li>
-<li class="dropdown">
+						<li>
+						<a href="/accounts/register/">Register</a>
+						</li>
+						<!--
+						
+						<li class="dropdown">
+
 						<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign Up<b class="caret"></b></a>
 							 <div class="dropdown-menu" style="padding: 10px;">
 								<form method="post" action="/accounts/register/">
-									{% csrf_token %}
+									Iser csrf_token here
 									<input type="text" name="email" placeholder="Email"/><br/>
 									<input type="password" name="password" placeholder="Password"><br/>
 									<input class="btn" type="submit" value="Register"/>
 								</form>
 							</div>
-						</li>
+							</li>
+						-->
 						{% endif %}
 						
 					</ul>

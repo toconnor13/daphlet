@@ -159,7 +159,6 @@ def poll_complete(request):
 	d = Context({ 'poll_id': p.id })
 	text_content = poll_message.render(d)
 	msg = EmailMessage('New Poll Created', text_content, 'daphlet.polls@tcd.ie', [request.user.username])
-#	msg.content_subtype = "text"
 	msg.send()
 
 	return HttpResponseRedirect(reverse('polls.views.detail', args=(p.id,)))
@@ -172,6 +171,5 @@ def delete(request, poll_id):
 		user_poll_list = Poll.objects.filter(author=request.user.username)
 		return render_to_response('polls/account.html', {'user_poll_list': user_poll_list, 'message':message,}, context_instance=RequestContext(request))
 	
-	# HttpResponse("It's gone.")
 	else:
 		return HttpResponse("You can't delete this.")
