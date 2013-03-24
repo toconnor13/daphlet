@@ -15,7 +15,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^','polls.views.index'),
-    url(r'^polls/', include('polls.urls')),
+    url(r'^polls/', include('polls.urls') ),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/$', 'django.contrib.auth.views.login', 
 	    {'authentication_form': EmailAuthenticationForm}, name='login'),
