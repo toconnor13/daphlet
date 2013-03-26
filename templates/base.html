@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load tags %}
+{% load tag %}
 {% url homepage as home %}
 {% url my_polls as account %}
 {% url contact_page as contact %}
@@ -41,8 +41,8 @@
 
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="{% active request home %}"><a href="/polls/">Home</a></li>
-						<li class="{% active request contact %}"><a href="/polls/contact/">Contact</a></li>
+						<li class="{% active path home %}"><a href="/polls/">Home</a></li>
+						<li class="{% active path contact %}"><a href="/polls/contact/">Contact</a></li>
 					</ul>
 					
 
