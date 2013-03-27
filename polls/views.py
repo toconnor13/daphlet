@@ -20,17 +20,21 @@ import re
 def index(request):
 	latest_poll_list = sorted(Poll.objects.all(), key=Poll.vote_count, reverse=True)
 	register_form = EmailUserCreationForm
+	path = request.path
 	return render_to_response('polls/index.html', {
 		'latest_poll_list': latest_poll_list,
 		'register_form': register_form,
+		'path': path,
 		}, context_instance=RequestContext(request))
 
 def contact(request):
-	return render_to_response('polls/contact.html', context_instance=RequestContext(request))
+	path = request.path
+	return render_to_response('polls/contact.html',{'path': path}, context_instance=RequestContext(request))
 
 def account(request):
 	user_poll_list = Poll.objects.filter(author=request.user.username)
-	return render_to_response('polls/account.html', {'user_poll_list': user_poll_list,}, context_instance=RequestContext(request))
+	path = request.path
+	return render_to_response('polls/account.html', {'user_poll_list': user_poll_list, 'path': path}, context_instance=RequestContext(request))
 
 
 @login_required

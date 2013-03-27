@@ -41,8 +41,8 @@
 
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="{% active path home %}"><a href="/polls/">Home</a></li>
-						<li class="{% active path contact %}"><a href="/polls/contact/">Contact</a></li>
+						<li class="{% active path "^/polls/$" %}"><a href="/polls/">Home</a></li>
+						<li class="{% active path "^/polls/contact/" %}"><a href="/polls/contact/">Contact</a></li>
 					</ul>
 					
 
@@ -59,7 +59,7 @@
 						{% if user.is_authenticated %}
 						<a href="/logout">Logout</a>
 						</li>
-						<li class="{% active request account %}">
+						<li class="{% active path "^/polls/user/account/$" %}">
 						<a href="/polls/user/account/">My Polls</a>
 						</li>
 						{% else %}
