@@ -31,10 +31,27 @@
 			<td>{{poll.id}}</td>
 			<td><a href="/polls/{{poll.id}}/results/">{{ poll.question }}</a></td>
 			<td><a href="/polls/{{poll.id}}/delete/">Delete</a></td>
+			<td><a href="#myModal" role="button" class="btn" data-toggle="modal">Delete</a></td>
 		</tr>
 			{% endfor %}
 	</tbody>
 </table>
+</div>
+
+
+<div class="modal hide fade">
+	<div id="myModal" class="modal-header" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+		<h3>Delete Poll</h3>
+	</div>
+
+	<div class="modal-body">
+		<p>Are you sure you wish to delete this poll?</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn">Cancel</a>
+		<a href="#" class="btn btn-primary">Delete</a>
+	</div>
 </div>
 
 {% endblock %}
