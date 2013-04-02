@@ -23,7 +23,7 @@ from django.conf.urls.defaults import *
 
 from registration.views import register
 from registration.views import activate
-from registration.views.simply import direct_to_template
+from registration.backends.simple.simple import direct_to_template
 
 urlpatterns = patterns('',
                        url(r'^register/$',
