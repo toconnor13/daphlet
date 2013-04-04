@@ -1,8 +1,7 @@
 Thank you for registering with Daphlet. To activate your account, please click on the following link within
 {{ expiration_days }} days.
 
-https://daffy-cliffs-7121.herokuapp.com/accounts/activate/{{ activation_key
-}}/
+https://daffy-cliffs-7121.herokuapp.com/accounts/activate/{{ activation_key}}/
 
 All the best,
 Tony.
