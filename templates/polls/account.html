@@ -30,7 +30,6 @@
 		<tr>
 			<td>{{poll.id}}</td>
 			<td><a href="/polls/{{poll.id}}/results/">{{ poll.question }}</a></td>
-			<td><a href="/polls/{{poll.id}}/delete/">Delete</a></td>
 			<td><a href="#myModal{{forloop.counter}}" role="button" class="btn" data-toggle="modal">Delete</a></td>
 		</tr>
 			{% endfor %}
