@@ -181,7 +181,7 @@ DATABASES['default'] = dj_database_url.config()
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-if bool(os.environ.get('LOCAL_DEV', True)):
+if not bool(os.environ.get('LOCAL_DEV', False)):
 
 	DATABASES = {
     		'default': {
