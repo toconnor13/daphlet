@@ -2,19 +2,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span4">
-<h1>{{ poll.question }}</h1>
+
+<div class="container-fluid" style="margin: 20px 220px;">
+	<div class="row">
+		<div class="offset2 span4">
 
 {% if error_message %} <p> <strong> {{ error_message}}  </strong>  </p> {% endif %}
 
 <form action="/polls/{{ poll.id }}/vote/" method="post">
-{% csrf_token %}
-{% for choice in poll.choice_set.all %}
-	<input type="radio" name="choice" id="choice{{ forloop.counter}}" value="{{choice.id}}" />
-	<label for="choice{{forloop.counter}}">{{ choice.choice }}</label><br />
+	<fieldset>
+		<legend>{{poll.question}}</legend>
+		{% csrf_token %}
+		{% for choice in poll.choice_set.all %}
+			<label class="radio" style="margin: 15px 0px;">
+			<input type="radio" name="choice" id="choice{{ forloop.counter}}" value="{{choice.id}}" checked>
+			{{ choice.choice }}
+	</label>
 {% endfor %}
-
-<input type="submit" value="Vote" />
+	<input class="btn" type="submit" value="Vote" />
+	</fieldset>
 </form>
+</div>
+</div>
 </div>
 {% endblock %}

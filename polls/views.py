@@ -83,7 +83,11 @@ def vote(request, poll_id):
 				selected_choice.save()
 				return HttpResponseRedirect(reverse('polls.views.results', args=(p.id,)))
 			else:
-				return HttpResponse('It seems you have already voted.')
+				return render_to_response('polls/detail.html', {
+					'poll':p,
+					'error_message': "You have already voted in this poll. Go to the <>",
+					}, context_instance=RequestContext(request)) 
+					
 		else:
 			return render_to_response('polls/detail.html', {
 				'poll': p,
