@@ -5,13 +5,17 @@
 	<form method="POST" action="/polls/create_poll/2/" class="form-horizontal">
 		{% csrf_token %}
 
-			<h1 style="margin: 30px 100px; ">Create a Poll</h1>
+			<h1 style="text-align: center; margin: 20px; ">Create a Poll</h1>
+
+		<div class="container" style="margin: 30px 300px;">
+
+		<div style="margin: 0px 50px;">
 		<div class="control-group">
 			<label class="control-label">Question</label>
 			<div class="controls">
 				<input type="text" name="question" placeholder="Your question here">
 			</div>
-		</div>
+	</div>
 
 		<div class="control-group">
 			<label class="control-label">How many choices?</label>
@@ -29,9 +33,11 @@
 			</div>
 		</div>
 
+		</div>
+
 		<div class="control-group">
 		<div class="controls">
-			<legend>Vote Controls</legend>
+			<legend style="max-width:450px; ">Vote Controls</legend>
 
 			<label class="radio">
 				<input type="radio" name="restrict" value="no_restriction" checked>No restriction on who votes, but all can only vote once.
@@ -47,8 +53,9 @@
 
 			
 
-			<input class="btn" type="submit" value="Add some choices >>">
-		</div>
+			<input class="btn" style="margin-top: 20px;" type="submit" value="Add some choices >>">
+	</div>
+	</div>
 
 			
 

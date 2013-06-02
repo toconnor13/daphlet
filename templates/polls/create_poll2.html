@@ -15,7 +15,7 @@
 
 		{% for choice in choicelist %}
 		<div class="control-group">
-				<label class="control-label">Choice</label>
+				<label class="control-label">Choice {{forloop.counter}}:</label>
 				<div class="controls">
 					<input type="text" name ="{{choice}} " placeholder="Choice">
 				</div>
