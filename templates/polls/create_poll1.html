@@ -31,15 +31,23 @@
 
 		<div class="control-group">
 		<div class="controls">
-			<label class="checkbox">
+			<legend>Vote Controls</legend>
 
-				<input type="checkbox" name="restrict_choice" value="1">Control who votes (e.g. only those with a @tcd.ie email)
+			<label class="radio">
+				<input type="radio" name="restrict" value="no_restriction" checked>No restriction on who votes, but all can only vote once.
 			</label>
-			<label class="checkbox">
-				<input type="checkbox" name="emails_restrict" value="1">Control who votes by supplying a list of emails
+
+			<label class="radio">
+				<input type="radio" name="restrict" value="restrict_choice">Control who votes (e.g. only those with a @tcd.ie email)
 			</label>
+
+			<label class="radio">
+				<input type="radio" name="restrict" value="email_restrict">Control who votes by supplying a list of emails
+			</label>
+
+			
+
 			<input class="btn" type="submit" value="Add some choices >>">
-			<label>
 		</div>
 
 			
