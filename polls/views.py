@@ -85,7 +85,7 @@ def vote(request, poll_id):
 			else:
 				return render_to_response('polls/detail.html', {
 					'poll':p,
-					'error_message': "You have already voted in this poll. Go to the <>",
+					'error_message': "You have already voted in this poll.",
 					}, context_instance=RequestContext(request)) 
 					
 		else:
@@ -119,9 +119,10 @@ def create_poll2(request):
 	no_of_choices = request.POST['no_of_choices']
 	restricted_by_domain = False
 	restricted_by_list = False
-	if 'restrict_choice' in request.POST:
+#	if 'restrict_choice' in request.POST:
+	if request.POST['restrict'] == 'restrict_choice':
 		restricted_by_domain = True
-	if 'emails_restrict' in request.POST:
+	if request.POST['restrict'] == 'email_restrict':
 		restricted_by_list = True
 	i=0
 	choicelist = []

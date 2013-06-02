@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<div class="span4">
-	<h1>{{ question }}</h1>
-	<form class="form-horizontal "method="post" action="/polls/poll_complete/">
+<div class="container" style="">
+	<h2 style="text-align: center;">{{ question }}</h2>
+	<form class="form-horizontal" style="margin: 20px 300px;"  method="post" action="/polls/poll_complete/">
 		{% csrf_token %}
 		<div class="control-group">
 			<label class="control-label">Question:</label>
