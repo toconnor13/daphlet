@@ -119,7 +119,9 @@ def create_poll2(request):
 	no_of_choices = request.POST['no_of_choices']
 	restricted_by_domain = False
 	restricted_by_list = False
-#	if 'restrict_choice' in request.POST:
+	add_close_date = False
+	if 'close_date' in request.POST:
+		add_close_date= True
 	if request.POST['restrict'] == 'restrict_choice':
 		restricted_by_domain = True
 	if request.POST['restrict'] == 'email_restrict':
@@ -135,6 +137,7 @@ def create_poll2(request):
 		'choicelist': choicelist,
 		'restricted': restricted_by_domain,
 		'restricted_by_list': restricted_by_list,
+		'add_close_date': add_close_date,
 		},
 		context_instance=RequestContext(request)
 		)
