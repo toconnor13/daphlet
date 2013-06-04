@@ -15,7 +15,7 @@ from django.utils import timezone
 from django import forms
 from emailusernames.forms import EmailAuthenticationForm, EmailAdminAuthenticationForm, EmailUserCreationForm, EmailUserChangeForm
 import re
-
+import datetime
 
 def index(request):
 	latest_poll_list = sorted(Poll.objects.all(), key=Poll.vote_count, reverse=True)
@@ -40,7 +40,16 @@ def account(request):
 @login_required
 def detail(request, poll_id):
 	p = get_object_or_404(Poll, pk=poll_id)
-	return render_to_response('polls/detail.html', {'poll': p,}, context_instance=RequestContext(request))
+	close_time = p.close_date
+	if p.close_date < timezone.now():
+		return render_to_response('polls/detail.html', {
+			'poll': p,
+			'error_message': "The poll has closed.",
+			'closed': True,
+			'close_time': p.close_date,
+			}, context_instance=RequestContext(request))
+	return render_to_response('polls/detail.html', {'poll': p,
+			'close_time': close_time,}, context_instance=RequestContext(request))
 
 
 @login_required
@@ -65,7 +74,14 @@ def results(request, poll_id):
 @login_required
 def vote(request, poll_id):
 	p = get_object_or_404(Poll, pk=poll_id)
-	list_of_emails = p.restrict_to_emails.split(',')
+	list_of_emails = p.restrict_to_emails
+	if p.close_date < timezone.now():
+			return render_to_response('polls/detail.html', {
+					'poll': p,
+					'error_message': "The poll has closed.",
+					'closed': True,
+					'close_time': p.close_date,
+					}, context_instance=RequestContext(request))
 	try:
 		selected_choice = p.choice_set.get(pk=request.POST['choice'])
 	except (KeyError, Choice.DoesNotExist):
@@ -157,6 +173,13 @@ def poll_complete(request):
 		p.restrict_to_emails = raw_choicedict['email_list'].split(',')
 		p.restrict_to_domain = u'Invalid'
 		del raw_choicedict['email_list']
+	if 'close_time' in request.POST:
+			time_string = raw_choicedict['close_time']
+			time_pattern = r'(\d+)-(\d+)-(\d+)\s(\d+):(\d+)'
+			match = re.search(time_pattern, time_string)
+			given_date = datetime.datetime(int(match.group(1)), int(match.group(2)),int(match.group(3)), int(match.group(4)), int(match.group(5)))
+			p.close_date = given_date
+			del raw_choicedict['close_time']
 	p.save()
 	del raw_choicedict['csrfmiddlewaretoken']
 	del raw_choicedict['question']

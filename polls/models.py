@@ -8,6 +8,7 @@ class Poll(models.Model):
 	question = models.CharField(max_length=200)
 	author = models.CharField(max_length=200)
 	pub_date = models.DateTimeField('date_published')
+	close_date = models.DateTimeField('close_poll', default=timezone.now()+datetime.timedelta(days=1825))
 	has_voted_list = models.CommaSeparatedIntegerField(max_length=1000000)
 	restrict_to_domain = models.CharField(max_length=200, default="None")
 	restrict_to_emails = models.CharField(max_length=8000, default="None")

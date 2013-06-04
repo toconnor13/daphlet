@@ -15,13 +15,14 @@
 		{% csrf_token %}
 		{% for choice in poll.choice_set.all %}
 			<label class="radio" style="margin: 15px 0px;">
-			<input type="radio" name="choice" id="choice{{ forloop.counter}}" value="{{choice.id}}" checked>
+					<input type="radio" name="choice" id="choice{{ forloop.counter}}" value="{{choice.id}}" {% if closed %}disabled="disabled"{% endif %}>
 			{{ choice.choice }}
 	</label>
 {% endfor %}
 	<input class="btn" type="submit" value="Vote" />
 	</fieldset>
 </form>
+<p>Poll Closing Time: {{ close_time }}</p>
 </div>
 </div>
 </div>
