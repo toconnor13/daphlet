@@ -23,8 +23,13 @@
 		{% endfor %}
 
 		{% if add_close_date %}
+		<div class="control-group">
+			<label class="control-label">Close poll at:</label>
+			<div class="controls">
+				<input size="16" type="text" value="2012-06-15 14:45"  class="form_datetime">
+			</div>
+		</div>
 
-			<input size="16" type="text" value="2012-06-15 14:45" readonly class="form_datetime">
 
 			<script type="text/javascript">
 				$(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
