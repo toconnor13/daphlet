@@ -1,14 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container" style="max-width: 700px; ">
+<h2 style="text-align: center;"> {{poll.question}}  </h2>
 
-<h1> {{poll.question}}  </h1>
+<table class="table">
+	<thead>
+		<th>Choice</th>
+		<th>Votes</th>
+	</thead>
 
-<ul>
-	{% for choice in poll.choice_set.all %}
-		<li> {{ choice.choice}} -- {{ choice.votes}}  vote{{ choice.votes|pluralize}} </li>
-	{% endfor %}
-</ul>
+	<tbody>
+		{% for choice in poll.choice_set.all %}
+			<tr>
+				<td>{{ choice.choice}}</td>
+				<td> {{ choice.votes}}</td> 
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
 
 <p>The following have voted:</p>
 <ul>
@@ -16,5 +26,7 @@
 		<li> {{user.username}}  </li>
 	{% endfor %}
 </ul>
+
+</div>
 
 {% endblock %}
