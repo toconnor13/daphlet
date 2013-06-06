@@ -2,10 +2,10 @@ Hi there,
 
 You've just created a new poll on Daphlet.
 
-To vote, go here: www.daphlet.com/polls/{{ poll_id }}/vote
+To vote, go here: infinite-temple-9931.herokuapp.com/polls/{{ poll_id }}/vote
 
-To see the results, go here: www.daphlet.com/polls/{{ poll_id }}/results
+To see the results, go here: infinite-temple-9931.herokuapp.com/polls/{{ poll_id }}/results
 
-To delete the poll, go here: www.daphlet.com/polls/user/account/
+To delete the poll, go here: infinite-temple-9931.herokuapp.com/polls/user/account/
 
 Good luck!
