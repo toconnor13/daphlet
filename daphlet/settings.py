@@ -19,7 +19,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/sheefrex/code/daphlet_db.db',                      # Or path to database file if using sqlite3.
+        'NAME': '/home/sheefrex/code/daphlet_db2.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -69,6 +69,10 @@ STATIC_ROOT = ''
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+#SITE_URL = 'infinite-temple-9931.herokuapp.com'
+
+#if bool(os.environ.get('LOCAL_DEV', True)):
+#		SITE_URL = '127.0.0.1:8000'
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -143,10 +147,12 @@ LOGIN_URL = ('/login/')
 # DEFAULT_FROM_EMAIL = 'daphlet.polls@gmail.com'
 SERVER_EMAIL = 'daphlet.polls@gmail.com'
 
+
+
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'daphlet.polls@gmail.com'
-EMAIL_HOST_PASSWORD = 'daphlet123'
+EMAIL_HOST_PASSWORD = os.environ['DAPH_MAIL_PWD']
 EMAIL_PORT = 587
 
 # A sample logging configuration. The only tangible logging
@@ -183,5 +189,5 @@ DATABASES['default'] = dj_database_url.config()
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-#if bool(os.environ.get('LOCAL_DEV', True)):
-#	DATABASES ={'default': {  'ENGINE': 'django.db.backends.sqlite3',  'NAME': '/home/sheefrex/code/daphlet_db.db', 'USER': '',  'PASSWORD': '','HOST': '', 'PORT': '',  }	}
+if bool(os.environ.get('LOCAL_DEV', True)):
+	DATABASES ={'default': {  'ENGINE': 'django.db.backends.sqlite3',  'NAME': '/home/sheefrex/code/daphlet_db.db', 'USER': '',  'PASSWORD': '','HOST': '', 'PORT': '',  }	}

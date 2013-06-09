@@ -15,6 +15,7 @@ from django.utils import timezone
 from django import forms
 from emailusernames.forms import EmailAuthenticationForm, EmailAdminAuthenticationForm, EmailUserCreationForm, EmailUserChangeForm
 import re
+import os
 import datetime
 
 def index(request):
@@ -191,7 +192,9 @@ def poll_complete(request):
 
 	poll_message = get_template('polls/poll_mail.txt')
 	
-	d = Context({ 'poll_id': p.id })
+	d = Context({ 'poll_id': p.id, 
+			'SITE_URL': os.environ['SITE_URL'],
+			})
 	text_content = poll_message.render(d)
 	msg = EmailMessage('New Poll Created', text_content, 'daphlet.polls@tcd.ie', [request.user.username])
 	msg.send()

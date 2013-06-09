@@ -2,7 +2,7 @@ Hi there,
 
 You've just created a new poll on Daphlet.
 
-To vote, go here: infinite-temple-9931.herokuapp.com/polls/{{ poll_id }}/vote
+To vote, go here: {{SITE_URL}}polls/{{ poll_id }}/vote
 
 To see the results, go here: infinite-temple-9931.herokuapp.com/polls/{{ poll_id }}/results
 
