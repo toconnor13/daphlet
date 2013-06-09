@@ -4,8 +4,8 @@ You've just created a new poll on Daphlet.
 
 To vote, go here: {{SITE_URL}}polls/{{ poll_id }}/vote
 
-To see the results, go here: infinite-temple-9931.herokuapp.com/polls/{{ poll_id }}/results
+To see the results, go here: {{SITE_URL}}polls/{{ poll_id }}/results
 
-To delete the poll, go here: infinite-temple-9931.herokuapp.com/polls/user/account/
+To delete the poll, go here: {{SITE_URL}}polls/user/account/
 
 Good luck!
