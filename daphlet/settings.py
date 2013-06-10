@@ -189,5 +189,5 @@ DATABASES['default'] = dj_database_url.config()
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-if bool(os.environ.get('LOCAL_DEV', True)):
-	DATABASES ={'default': {  'ENGINE': 'django.db.backends.sqlite3',  'NAME': '/home/sheefrex/code/daphlet_db.db', 'USER': '',  'PASSWORD': '','HOST': '', 'PORT': '',  }	}
+#if bool(os.environ.get('LOCAL_DEV', True)):
+#	DATABASES ={'default': {  'ENGINE': 'django.db.backends.sqlite3',  'NAME': '/home/sheefrex/code/daphlet_db.db', 'USER': '',  'PASSWORD': '','HOST': '', 'PORT': '',  }	}
